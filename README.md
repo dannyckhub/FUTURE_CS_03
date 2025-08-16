@@ -1,41 +1,62 @@
 # FUTURE_CS_03
 Secure file upload/download portal with AES encryption using Flask.
 
-Flask AES File Portal
+🔐 Secure File Upload/Download Portal with AES Encryption
 
-A simple file upload/download portal built with Flask and AES encryption using PyCryptodome.
-This project secures files both at rest (on disk) and in transit (via HTTPS if deployed with TLS).
+This project is a Flask-based web portal that allows users to securely upload and download files.
+All uploaded files are encrypted using AES (Advanced Encryption Standard) before being stored, ensuring security at rest and in transit.
 
-🔧 Features
+🚀 Features
 
-Upload files securely via web form or curl/Postman
+🔒 AES Encryption (CBC mode) → Files are encrypted before storage
 
-Files encrypted with AES (CBC mode) before storage
+🗝️ Unique encryption key per session (using PyCryptodome)
 
-Download & automatic decryption of files
+📤 Upload files securely via web form or API (curl/Postman)
 
-Works locally or can be deployed on any server
+📥 Download & decrypt files on request
+
+📂 Organized storage of encrypted and decrypted files
+
+🌐 Flask API endpoints for integration and testing
+
+🔧 Tools & Technologies
+
+Python 3.x
+
+Flask → Web framework
+
+PyCryptodome → AES encryption library
+
+HTML/CSS (Bootstrap) → Simple frontend UI
+
+curl / Postman → API testing tools
+
+Git & GitHub → Version control and repository hosting
 
 📂 Project Structure
 FlaskAES/
-│── app.py              # Main Flask application  
-│── requirements.txt    # Dependencies (Flask, pycryptodome)  
-│── uploads/            # Stores encrypted & decrypted files  
-│── README.md           # Project documentation  
+│── app.py                # Main Flask application
+│── requirements.txt      # Python dependencies
+│── uploads/              # Stores encrypted files
+│── decrypted/            # Stores decrypted files
+│── templates/
+│     └── index.html      # Upload/Download UI
+│── README.md             # Project documentation
 
-⚡ Installation & Setup
+⚡ Setup & Run
 
-Clone repo
+Clone the repository
 
 git clone https://github.com/dannyckhub/flask-aes-portal.git
 cd flask-aes-portal
 
 
-Create virtual environment
+Create & activate virtual environment
 
 python -m venv venv
-venv\Scripts\activate   # On Windows
-source venv/bin/activate # On Linux/Mac
+venv\Scripts\activate   # Windows
+source venv/bin/activate # Linux/Mac
 
 
 Install dependencies
@@ -43,38 +64,44 @@ Install dependencies
 pip install -r requirements.txt
 
 
-Run the app
+Run the Flask app
 
 python app.py
 
 
-Visit in browser:
+Access in browser
 👉 http://127.0.0.1:5000
 
-📤 Upload Example (via curl)
-curl -X POST -F "file=@example.txt" http://127.0.0.1:5000/upload
+📤 Upload a File (via curl/Postman)
+curl -X POST -F "file=@test.txt" http://127.0.0.1:5000/upload
 
-📥 Download Example
-curl -O http://127.0.0.1:5000/download/example.txt
 
-🔒 Security Notes
+✔️ File will be encrypted and stored in uploads/
 
-AES key is generated once per session in this demo.
+📥 Download & Decrypt File
+curl -X GET "http://127.0.0.1:5000/download?filename=test.txt.enc" --output decrypted.txt
 
-For production:
 
-Use a persistent key (stored securely, e.g., in an environment variable).
+✔️ File will be decrypted and saved as decrypted.txt
 
-Deploy with HTTPS (TLS) to secure data in transit.
+🛡️ Security Highlights
 
-Add authentication before allowing uploads/downloads.
+AES-CBC mode with PKCS7 padding
 
-🛠 Tools & Skills Demonstrated
+Random IV (Initialization Vector) for every encryption
 
-Flask (Python web framework)
+Separation of encrypted vs. decrypted files
 
-PyCryptodome (AES encryption/decryption)
+API endpoints for automation and testing
 
-Git & GitHub (version control & project hosting)
+🛠 Skills Demonstrated
 
-Postman / curl (API testing)
+Flask backend development
+
+File handling (upload/download in web apps)
+
+AES encryption with PyCryptodome
+
+API testing using curl/Postman
+
+Secure coding & project structuring
